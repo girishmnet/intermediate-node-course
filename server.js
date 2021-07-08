@@ -3,12 +3,18 @@ const mongoose= require('mongoose');
 const bodyParser= require('body-parser');
 const port=8000;
 const app= express();
+const User = require('./models/User');
 
 app.use(bodyParser.json());
 
 app.listen(port, ()=>{
 	console.log(`server is listening on port:${port}`)
 })
+
+mongoose.set('useUnifiedTopology', true);
+mongoose.set('useCreateIndex', true);
+mongoose.connect('mongodb://localhost/userData', { useNewUrlParser: true })
+
 
 // CREATE
 app.post('/users',(req,res)=>{
